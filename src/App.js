@@ -1,25 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import Datasheets from './components/Datasheets';
+import SecurityCheck from './components/SecurityCheck';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      loggedIn: true,
+      user: null
+    };
+  }
+
+  render()
+  {
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <div>Imperial Database</div>
+        </header>
+        <div className="App-body">
+          { this.state.loggedIn? <Datasheets /> : <SecurityCheck /> }
+        </div>
+        <footer className="App-footer">Some information</footer>
+      </div>
+    );
+  }
 }
 
 export default App;

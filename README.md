@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# Imperial Database
+
+A simple React UI for navigating the Star Wars API.
+
+Star Wars API is moved to [https://swapi.dev](https://swapi.dev).
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

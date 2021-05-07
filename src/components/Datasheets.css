@@ -1,0 +1,75 @@
+.datasheet {
+    margin: 10px;
+    padding: 15px;
+    background-color: rgba(19, 152, 210, 0.2);
+    border: 2px solid rgba(19, 152, 210, 0.9);
+    box-shadow: 1px 1px 4px rgba(55, 252, 255, 0.7);
+}
+
+.datasheet-header,
+.datasheet-body  {
+    border: 2px solid rgba(19, 152, 210, 0.2);
+    background-color: rgba(55, 152, 255, 0.1);
+}
+
+.datasheet-body {
+    display: flex;
+    justify-content: stretch;
+    align-content: stretch;
+    margin-top: 10px;
+}
+
+.datasheet-categories,
+.floating-panel-top {
+    width: 270px;
+    position: relative;
+}
+.categories-list,
+.category-sublist {
+    list-style-type: none;
+    text-align: justify;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgba(19, 152, 210, 0.2);
+}
+.category {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(19, 152, 210, 0.2);
+    cursor: pointer;
+}
+.category:hover {
+    background-color: rgba(5, 102, 205, 0.1);
+}
+.category:active,
+.category.selected {
+    background-color: rgba(5, 102, 205, 0.2);
+}
+
+.selected-category {
+    position: absolute;
+    top: 50px;
+    left: calc(125px + 7vw);
+    width: 270px;
+    border: 1px solid rgba(19, 152, 210, 0.2);
+    background-color: rgba(1, 72, 155, 0.5);
+    box-shadow: 1px 1px 4px rgba(55, 252, 255, 0.7);
+}
+
+.btn-close {
+    background-color: rgba(5, 2, 15, 0.7);
+    border: 2px solid rgba(19, 152, 210, 0.4);
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    line-height: 25px;
+    text-align:center;
+    right: -15px;
+    top: -15px;
+    cursor: pointer;
+}
+
+.datasheet-article {
+    width: 100%;
+    background-color: rgba(1, 2, 0, 0.3);
+}
