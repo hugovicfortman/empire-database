@@ -4,6 +4,7 @@
     background-color: rgba(19, 152, 210, 0.2);
     border: 2px solid rgba(19, 152, 210, 0.9);
     box-shadow: 1px 1px 4px rgba(55, 252, 255, 0.7);
+    min-height: 69vh;
 }
 
 .datasheet-header,

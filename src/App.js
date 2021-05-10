@@ -25,7 +25,7 @@ class App extends React.Component {
         <div className="App-body">
           { this.state.loggedIn? <Datasheets /> : <SecurityCheck /> }
         </div>
-        <footer className="App-footer">Some information</footer>
+        <footer className="App-footer">"Wipe them out! All of Them" - Emperor Palpatine</footer>
       </div>
     );
   }
