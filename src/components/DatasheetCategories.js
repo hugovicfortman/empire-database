@@ -8,29 +8,50 @@ class DatasheetCategories extends React.Component {
         super();
 
         this.state = {
-
+            categories: {},
+            selectedCategory: null
         }
     }
 
     componentDidMount() {
         // Load the swapi root, and store in state
-        // fetch(`${SWAPI}`).then(r => console.log(r)
-        fetch(`http://localhost:3002`).then(r => console.log(r.json())
-        //     this.setState(() => ({
-        //     root : r.data
-        // }))
-        ).catch(e => console.log(e));
+        let myHeader = new Headers({
+            'X-AUTH-TOKEN': SWAPI.APIKEY
+          });
+        fetch(`${SWAPI.NOCORS}${SWAPI.URL}`, { headers: myHeader }).then(r => r.json())
+        .then((cs) => {
+            this.setState(() => ({ categories : cs }));
+        }).catch(e => console.log(e));
+    }
+
+    selectCategory(cat) {
+        this.setState(() => ({ selectedCategory: { cat : this.state.categories[cat] }}));
+    }
+
+    deselectCategory() {
+        this.setState(() => ({ selectCategory: null}));
     }
 
     render(){
+
+        const categories = (() => {
+            const cList = [];
+            for(let c in this.state.categories)
+            {
+                cList.push(<li key={ this.state.categories[c] } className="category" 
+                    onClick={ () => this.selectCategory(c) }>{c}</li>);
+            }
+            return cList;
+        })();
+
         return (
             <aside className="datasheet-categories">
                 <h4>Categories</h4>
                 <ul className="categories-list">
-                    <li className="category">People</li>
-                    <li className="category">Planets</li>
+                    {categories}
                 </ul>
-                <DatasheetSelectedCategory />
+                <DatasheetSelectedCategory category={ this.state.selectedCategory } 
+                    deselect={ this.deselectCategory }/>
             </aside>
         );
     }
