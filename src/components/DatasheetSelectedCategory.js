@@ -1,36 +1,49 @@
-class DatasheetSelectedCategory {
+import React from 'react';
+import getSWAPI from '../services/swapi'
+
+class DatasheetSelectedCategory extends React.Component {
     
     constructor() {
         super();
 
         this.state = {
-
+            datasheet: {
+                /**
+                 * count: 2
+                 * next: ''
+                 * previous: null
+                 * results: [{ name, title }]
+                 */
+                count: 0,
+                next: '',
+                previous: null,
+                results: []
+            }
         };
     }
 
     componentDidMount() {
         // Load the swapi root, and store in state
-        let myHeader = new Headers({
-            'X-AUTH-TOKEN': SWAPI.APIKEY
-          });
-        fetch(`${SWAPI.NOCORS}${SWAPI.URL}`, { headers: myHeader }).then(r => r.json())
-        .then((cs) => {
-            this.setState(() => ({ categories : cs }));
-        }).catch(e => console.log(e));
+        getSWAPI((dt) => this.setState(() => ({ datasheet : dt })), this.props.category.url);
+    }
+
+    getMoreResults() {
+
     }
 
     render() {
-        const cat = this.props.selectedCategory;
-        
+        let keyIndex = 0;
+        const items = this.state.datasheet.results.map((item) => <li className="category"
+            onClick={ () => this.props.selectArticle({ item: item, category: this.props.category.name}) } 
+            key={ (() => { keyIndex++; return keyIndex; })() }>{ item.name } { item.title }</li>);
         return (
             <div className="selected-category">
                 <div className="floating-panel-top">
                     <div className="btn-close">X</div>
                 </div>
-                <h5>{ cat }</h5>
+                <h5>{ this.props.category.name }</h5>
                 <ul className="category-sublist">
-                    <li className="category">People</li>
-                    <li className="category">Planets</li>
+                    { items }
                 </ul>
             </div>
         );
