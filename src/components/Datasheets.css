@@ -73,4 +73,5 @@
 .datasheet-article {
     width: 100%;
     background-color: rgba(1, 2, 0, 0.3);
+    word-wrap: break-word;
 }

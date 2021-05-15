@@ -9,6 +9,19 @@ class DatasheetCategories extends React.Component {
 
         this.state = {
             categories: {},
+            categoryData: {
+                /**
+                 * count: 2
+                 * next: ''
+                 * previous: null
+                 * results: [{ name, title }]
+                 */
+                count: 0,
+                next: '',
+                previous: null,
+                results: []
+            },
+            loadingData: false,
             selectedCategory: null
         }
     }
@@ -22,8 +35,15 @@ class DatasheetCategories extends React.Component {
         this.setState(() => ({ selectedCategory: { name: cat, url: this.state.categories[cat] }}));
     }
 
+    loadCategoryData(cat) {
+        // Load the swapi root, and store in state
+        this.setState(() => ({ loadingData: true }));
+        getSWAPI((dt) => this.setState(() => ({ categoryData : dt, loadingData: false })), 
+            this.state.categories[cat]);
+    }
+
     deselectCategory() {
-        this.setState(() => ({ selectCategory: null}));
+        this.setState(() => ({ selectedCategory: null}));
     }
 
     render(){
@@ -33,7 +53,11 @@ class DatasheetCategories extends React.Component {
             for(let c in this.state.categories)
             {
                 cList.push(<li key={ this.state.categories[c] } className="category" 
-                    onClick={ () => this.selectCategory(c) }>{c}</li>);
+                    onClick={ () => { 
+                        this.selectCategory(c);
+                        this.loadCategoryData(c);
+                        return;
+                    } }>{c}</li>);
             }
             return cList;
         })();
@@ -47,8 +71,10 @@ class DatasheetCategories extends React.Component {
                 {
                 this.state.selectedCategory !== null?
                     <DatasheetSelectedCategory category={ this.state.selectedCategory } 
-                        deselect={ () => this.deselectCategory() } 
-                        selectArticle={ (it) => this.props.selectArticle(it) } /> : <span></span>
+                        deselect={ () => this.deselectCategory() } data={ this.state.categoryData }
+                        selectArticle={ (it) => this.props.selectArticle(it) } 
+                        loading={ this.state.loadingData } 
+                        handleClose={ () => this.deselectCategory() }/> : <span></span>
                 }
             </aside>
         );

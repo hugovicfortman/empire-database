@@ -5,11 +5,10 @@ function DatasheetArticle(props) {
     let keyIndex = 0;
     for(let key in entity)
     {
-        data.push(<div style={ {display: "flex"} } key={ (() => { keyIndex++; return keyIndex; })() }><dt>{ key }</dt>
-            <dd>{ entity[key] }</dd></div>);
+        data.push(<div style={{display:"flex"}} key={ (() => { keyIndex++; return keyIndex; })() }>
+            <dt>{ key }</dt><dd style={{wordBreak:"break-word"}} >{ entity[key] }</dd></div>);
     }
 
-    console.log(data);
 
     return (
         <article className="datasheet-article">
