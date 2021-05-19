@@ -42,6 +42,16 @@ class DatasheetCategories extends React.Component {
             this.state.categories[cat]);
     }
 
+    loadMoreData(uri) {
+        // Load the swapi root, and store in state
+        getSWAPI((dt) => this.setState((prevState) => {
+            const ct = prevState.categoryData.results;
+            dt.results.concat(ct);
+            return { categoryData : dt }
+        }), 
+        uri);
+    }
+
     deselectCategory() {
         this.setState(() => ({ selectedCategory: null}));
     }
@@ -74,6 +84,7 @@ class DatasheetCategories extends React.Component {
                         deselect={ () => this.deselectCategory() } data={ this.state.categoryData }
                         selectArticle={ (it) => this.props.selectArticle(it) } 
                         loading={ this.state.loadingData } 
+                        loadMore={ (uri) => this.loadMoreData(uri) }
                         handleClose={ () => this.deselectCategory() }/> : <span></span>
                 }
             </aside>
