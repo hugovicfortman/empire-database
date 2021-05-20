@@ -45,9 +45,10 @@ class DatasheetCategories extends React.Component {
     loadMoreData(uri) {
         // Load the swapi root, and store in state
         getSWAPI((dt) => this.setState((prevState) => {
+            let { count, next, previous, results } = dt;
             const ct = prevState.categoryData.results;
-            dt.results.concat(ct);
-            return { categoryData : dt }
+            results = ct.concat(results);
+            return { categoryData : { count, next, previous, results } }
         }), 
         uri);
     }
