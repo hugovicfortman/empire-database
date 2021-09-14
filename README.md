@@ -1,12 +1,27 @@
 # Imperial Database
 
-A simple React UI for navigating the Star Wars API.
+A simple React UI for navigating the Star Wars REST API.
 
+![](imperial-db-img.png)
+
+This demonstrative project includes first and second layer navigation through the REST API endpoint provided at the Star Wars API. Deeper navigation layers appear as direct urls to the corresponding resources. For the sake of this demonstration, these external urls are non-clickable.
+
+!["Chewbacca's Data Sheet"](imperial-db-chewy.png)
 Star Wars API is moved to [https://swapi.dev](https://swapi.dev).
 
-## Getting Started with Create React App
+## Implemented Features
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Dynamic Loading using Fetch API
+
+All data is loaded from the Star Wars API using the default Fetch API. Since the browser's default behavior is to challenge CORS, requests are instead channelled through the server to meet the CORS security requirements.
+
+![](imperial-db-loading.png)
+
+### Scroll Paging
+
+Entity lists are paged for efficient loading. Once the user reaches the bottom of the list, a loader appears, and a request is raised to get and append the next page from the server. This behavior is repeated until there are no unloaded pages left.
+
+![](imperial-db-paging.png)
 
 ## Available Scripts
 
@@ -44,33 +59,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
