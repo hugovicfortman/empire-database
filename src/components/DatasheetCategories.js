@@ -1,5 +1,5 @@
 import React from 'react';
-import getSWAPI from '../services/swapi'
+import SWAPI from '../services/swapi'
 import DatasheetSelectedCategory from './DatasheetSelectedCategory';
 
 class DatasheetCategories extends React.Component {
@@ -24,11 +24,13 @@ class DatasheetCategories extends React.Component {
             loadingData: false,
             selectedCategory: null
         }
+
+        this.swapi = new SWAPI();
     }
 
     componentDidMount() {
         // Load the swapi root, and store in state
-        getSWAPI((cs) => this.setState(() => ({ categories : cs })))
+        this.swapi.getSWAPI((cs) => this.setState(() => ({ categories : cs })))
     }
 
     selectCategory(cat) {
@@ -38,13 +40,13 @@ class DatasheetCategories extends React.Component {
     loadCategoryData(cat) {
         // Load the swapi root, and store in state
         this.setState(() => ({ loadingData: true }));
-        getSWAPI((dt) => this.setState(() => ({ categoryData : dt, loadingData: false })), 
+        this.swapi.getSWAPI((dt) => this.setState(() => ({ categoryData : dt, loadingData: false })), 
             this.state.categories[cat]);
     }
 
     loadMoreData(uri) {
         // Load the swapi root, and store in state
-        getSWAPI((dt) => this.setState((prevState) => {
+        this.swapi.getSWAPI((dt) => this.setState((prevState) => {
             let { count, next, previous, results } = dt;
             const ct = prevState.categoryData.results;
             results = ct.concat(results);
